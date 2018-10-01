@@ -1,7 +1,7 @@
 public class Company {
     String companyName;
     String description;
-
+    //
     public Company(String companyName, String description){
         this.companyName = companyName;
         this.description = description;
