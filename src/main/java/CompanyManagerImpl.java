@@ -1,18 +1,23 @@
 import java.util.*;
+import org.apache.log4j.Logger;
 
 public class CompanyManagerImpl implements CompanyManager {
     private Map<String,Company> companyMap = new HashMap<String, Company>();
     private List<Employee> employeeList = new LinkedList<Employee>();
+
+    //aixo es pel warning amb log4j
+    final Logger log = Logger.getLogger(CompanyManagerImpl.class);
 
     public void addCompany(String companyName, String description){
         Company x = new Company(companyName,description);
         companyMap.put(x.getCompanyName(), x);
     }
 
-    public void addEmployee(String name, String surname, Date birthday, double salary, String companyName) throws CompanyNotFoundException{
+    public void addEmployee(String name, String surname, String birthday, double salary, String companyName) throws CompanyNotFoundException{
         Company c = this.companyMap.get(companyName);
         if (c== null){
             // log.warn()
+            log.warn("Error! This company do no exist");
             throw new CompanyNotFoundException("Could not find this company");
         } else {
             Employee e = new Employee(name,surname,birthday,salary,companyName);
@@ -43,6 +48,7 @@ public class CompanyManagerImpl implements CompanyManager {
     }
 
     public List<Employee> employees(String company){
+        //faltaria fer una expecio per si la empresa no existeix
         Company c = this.companyMap.get(company);
         List<Employee> employees = c.getEmployees();
         return employees;
