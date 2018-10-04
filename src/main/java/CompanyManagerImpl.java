@@ -13,7 +13,7 @@ public class CompanyManagerImpl implements CompanyManager {
         companyMap.put(x.getCompanyName(), x);
     }
 
-    public void addEmployee(String name, String surname, String birthday, double salary, String companyName) throws CompanyNotFoundException{
+    public void addEmployee(String name, String surname, Date birthday, double salary, String companyName) throws CompanyNotFoundException{
         Company c = this.companyMap.get(companyName);
         if (c== null){
             // log.warn()

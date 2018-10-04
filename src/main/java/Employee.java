@@ -3,12 +3,12 @@ import java.util.Date;
 public class Employee {
     public String name;
     public String surname;
-    //public Date birthday;
-    public String birthday;
+    public Date birthday;
+    //public String birthday;
     public double salary;
     public String companyName;
 
-    public Employee(String name, String surname, String birthday, double salary, String companyName) {
+    public Employee(String name, String surname, Date birthday, double salary, String companyName) {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
@@ -36,17 +36,17 @@ public class Employee {
         this.surname = surname;
     }
 
-    /*public Date getBirthday() {
+    public Date getBirthday() {
         return birthday;
-    }*/
+    }
 
-    /*public void setBirthday(Date birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }*/
+    }
 
-    public String getBirthday(){return birthday;}
+    /*public String getBirthday(){return birthday;}*/
 
-    public void setBirthday(String birthday){this.birthday = birthday;}
+    /*public void setBirthday(String birthday){this.birthday = birthday;}*/
 
     public double getSalary() {
         return salary;
