@@ -9,27 +9,21 @@ public class CompanyManagerImpl implements CompanyManager {
         companyMap.put(x.getCompanyName(), x);
     }
 
-    public void addEmployee(String name, String surname, Date birthday, double salary, String companyName){
-
-        if (companyMap.get(companyName) == null){
-            throw new MyException("Could not find this company");
+    public void addEmployee(String name, String surname, Date birthday, double salary, String companyName) throws CompanyNotFoundException{
+        Company c = this.companyMap.get(companyName);
+        if (c== null){
+            // log.warn()
+            throw new CompanyNotFoundException("Could not find this company");
         } else {
             Employee e = new Employee(name,surname,birthday,salary,companyName);
             employeeList.add(e);
+            c.addEmployee(e);
         }
     }
 
     public List<Employee> findAllEmployeesOrderedByName(){
         List<Employee> employeesOrderedByName = new LinkedList<Employee>();
-        for(Employee employee:employeeList)
-        {
-            employeesOrderedByName.add(employee);
-        }
-        Collections.sort(employeesOrderedByName, new Comparator<Employee>() {
-            public int compare(Employee o1, Employee o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        employeesOrderedByName.addAll(this.employeeList);
         return employeesOrderedByName;
     }
 
@@ -49,12 +43,8 @@ public class CompanyManagerImpl implements CompanyManager {
     }
 
     public List<Employee> employees(String company){
-        List<Employee> employees = new LinkedList<Employee>();
-        for (Employee e:employeeList){
-            if (e.getCompanyName()==company){
-                employees.add(e);
-            }
-        }
+        Company c = this.companyMap.get(company);
+        List<Employee> employees = c.getEmployees();
         return employees;
     }
 
