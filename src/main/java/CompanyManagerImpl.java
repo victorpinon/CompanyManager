@@ -29,6 +29,11 @@ public class CompanyManagerImpl implements CompanyManager {
     public List<Employee> findAllEmployeesOrderedByName(){
         List<Employee> employeesOrderedByName = new LinkedList<Employee>();
         employeesOrderedByName.addAll(this.employeeList);
+        Collections.sort(employeesOrderedByName, new Comparator<Employee>() {
+            public int compare(Employee o1, Employee o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         return employeesOrderedByName;
     }
 
@@ -48,7 +53,7 @@ public class CompanyManagerImpl implements CompanyManager {
     }
 
     public List<Employee> employees(String company){
-        //faltaria fer una expecio per si la empresa no existeix
+        //faltaria fer una excepcio per si la empresa no existeix
         Company c = this.companyMap.get(company);
         List<Employee> employees = c.getEmployees();
         return employees;
